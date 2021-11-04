@@ -5,8 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>State Manager</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="state-manager.js"></script>
-    <script>
+
+    <script type="text/babel">
         function spinnerReducer(currentState = 0, action) {
             if (action.type === 'INCREMENT') return currentState + 1;
             if (action.type === 'DECREMENT') return currentState - 1;
@@ -15,31 +19,43 @@
 
         let store = StateManager.createStore(spinnerReducer)
 
-        var inc_action = { type: 'INCREMENT' },
-            dec_action = { type: 'DECREMENT' };
+        //UI
+        const Spinner = ({store}) => {
+            //creating actions
+            let inc_action = { type: 'INCREMENT' },
+                dec_action = { type: 'DECREMENT' };
 
-        store.subscribe(() => {
-            console.log('store state changed to : ', store.getState())
-        });
+            //extracting state from store
+            let spinnerValue = store.getState();
 
-        /* 
-            store.dispatch(inc_action)
+            return (
+                <div id="spinner">
+                    <button onClick={ () => store.dispatch(dec_action) }>Decrement</button>
+                    <span> [ {spinnerValue} ] </span>
+                    <button onClick={ () => store.dispatch(inc_action)} >Increment</button>
+                </div>
+            )
+        }
 
-            store.dispatch(dec_action)
-        */
-
-
+        function renderSpinner(){
+            ReactDOM.render(
+                <Spinner store={store} />
+                , document.getElementById('root')
+            );
+        }
+        renderSpinner();
+        store.subscribe(renderSpinner);
     </script>
+
+    
 
 </head>
 <body>
     <h1>State Manager</h1>
 
     <!-- Render the following using React -->
-    <div id="spinner">
-        <button>Decrement</button>
-        <span> [ 0 ] </span>
-        <button>Increment</button>
+    <div id="root">
+
     </div>
 </body>
 </html>
