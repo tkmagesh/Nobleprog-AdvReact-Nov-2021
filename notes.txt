@@ -50,3 +50,7 @@ Choices of managing App State
     2. Mobx
     3. Context API
     4. Reflux
+
+
+Class A & Class B
+Class A depends on Class B (existential dependency)
