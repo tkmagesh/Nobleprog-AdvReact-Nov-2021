@@ -15,26 +15,31 @@
         2. Remove the direct dependency on the 'store' from the component
         3. Introducing 'action creators'
         4. Introducing 'action dispatchers' (get the action from the action creator and dispatch the action)
-        5. Simplifying passing the action dispatchers to the component (part-1)
-        
+        5. Simplifying passing the action dispatchers to the component
+        6. Generalizing the 'bindActionCreators'
      -->
 
     <script type="text/babel">
         function spinnerReducer(currentState = 0, action) {
             if (action.type === 'INCREMENT') return currentState + 1;
             if (action.type === 'DECREMENT') return currentState - 1;
+            if (action.type === 'DOUBLE_INCREMENT') return currentState * 2;
+            if (action.type === 'DOUBLE_DECREMENT') return currentState / 2;
             return currentState;
         }
 
         let store = StateManager.createStore(spinnerReducer)
 
         //UI
-        const Spinner = ({value, increment, decrement}) => {
+        const Spinner = ({value, increment, decrement, doubleIncrement, doubleDecrement}) => {
             return (
                 <div id="spinner">
+                    <button onClick={ () => doubleDecrement()}>Double Decrement</button>
                     <button onClick={ () => decrement() }>Decrement</button>
                     <span> [ {value} ] </span>
                     <button onClick={ () => increment() } >Increment</button>
+                    <button onClick={ () => doubleIncrement()}>Double Increment</button>
+                    
                 </div>
             )
         }
@@ -45,20 +50,23 @@
             },
             decrement: () => {
                 return { type: 'DECREMENT' }
+            },
+            doubleIncrement: () => {
+                return { type: 'DOUBLE_INCREMENT' }
+            },
+            doubleDecrement: () => {
+                return { type: 'DOUBLE_DECREMENT' }
             }
         }
 
         function bindSpinnerActionCreators(actionCreators, dispatch) {
-            const actionDispatchers = {
-                increment: () => {
-                    const action = actionCreators.increment();
-                    dispatch(action);
-                },
-                decrement: () => {
-                    const action = actionCreators.decrement();
+            const actionDispatchers = {};
+            for (let key in actionCreators) {
+                actionDispatchers[key] = function(...args){
+                    const action = actionCreators[key](...args);
                     dispatch(action);
                 }
-            };
+            }
             return actionDispatchers;
         }
 
