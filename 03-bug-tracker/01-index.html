@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Manager</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/redux/dist/redux.js"></script>
+
+    <style>
+        body{
+            margin: 50px;
+        }
+        section{
+            margin-bottom: 10px;
+        }
+        .stats, .bugname {
+            font-size:18pt;
+        }
+        .closed{
+            color : red;
+            text-decoration: line-through;
+            font-style: italic;
+        }
+        .bugname{
+            cursor : pointer;
+        }
+        ol{
+            width : 450px;
+            list-style: none;
+            -webkit-padding-start: 0px;
+        }
+        li{
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+    </style>
+    <!-- 
+        Use cases:
+        (done) 1. Add new bugs
+        (done) 2. List the added bugs
+        (done) 3. Toggle the 'closed' status of any bug
+        4. Remove any bug
+        5. Remove 'closed' bugs
+        6. Display stats ( # of closed bugs / total # of bugs)
+        7. Persisting the bugs in the server
+        8. Sort the bugs (assignment)
+        9. Filter the bugs (assignment)
+        10. Associate the bugs with projects
+     -->
+    <script type="text/babel">
+
+        //TOBE FIXED
+        let currentBugId = 0;
+
+        const bugActionCreators = {
+            addNew(bugName){
+                const newBug = {
+                    id : ++currentBugId,
+                    name : bugName,
+                    isClosed : false,
+                    createdAt : new Date()
+                };
+                const action = { type : 'BUGS_ADD_NEW', payload : newBug};
+                return action;
+            },
+            toggle(bugToToggle){
+                const toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed};
+                const action = { type : 'BUGS_REPLACE', payload : toggledBug};
+                return action;
+            }
+            
+        }
+
+        const bugsReducer = (currentState = [], action) => {
+            if (action.type === 'BUGS_ADD_NEW'){
+                return [...currentState, action.payload];
+            }
+            if (action.type === 'BUGS_REPLACE'){
+                return currentState.map(bug => bug.id === action.payload.id ? action.payload : bug);
+            }
+            return currentState;
+        }
+
+        const Bugs = ({bugs, addNew, toggle}) => {
+            const [newBugName, setNewBugName] = React.useState('');
+            const onBtnCreateClick = () => {
+                addNew(newBugName);
+                setNewBugName('');
+            };
+
+            const bugsList = bugs.map(bug => (
+                <li key={bug.id}>
+                    <span className={"bugname " + (bug.isClosed ? 'closed' : '')} onClick={ () => toggle(bug)}>
+                        {bug.name}
+                    </span>
+                    <div className="datetime">{bug.createdAt.toString()}</div>
+                    <button>Remove</button>
+                </li>
+            ));
+            return (
+                <>
+                    <section className="stats">
+                        <span className="closed">1</span>
+                        <span> / </span>
+                        <span>2</span>
+                    </section>
+                    <section className="edit">
+                        <label htmlFor="">Bug Name : </label>
+                        <input type="text" value={newBugName} onChange={ evt => setNewBugName(evt.target.value)} />
+                        <button onClick={() => onBtnCreateClick(newBugName)}>Create New</button>
+                    </section>
+                    <section className="sort">
+                        <label htmlFor="">Order By :</label>
+                        <select>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                        <label htmlFor="">Descending ? : </label>
+                        <input type="checkbox" />
+                    </section>
+                    <section className="list">
+                        <ol>
+                           {bugsList}
+                        </ol>
+                        <button>Remove Closed</button>
+                    </section>
+                </>
+            )
+        }
+        
+        const store = Redux.createStore(bugsReducer);
+
+        const bugActionDispatchers = Redux.bindActionCreators(bugActionCreators, store.dispatch);
+
+        function renderApp(){
+            const bugs = store.getState();
+            ReactDOM.render(
+                <Bugs bugs={bugs} {...bugActionDispatchers} />
+                , document.getElementById('root')
+            )
+        }
+        renderApp();
+        store.subscribe(renderApp);
+    </script>
+</head>
+<body>
+    <h1>Bug Tracker</h1>
+    <hr>
+    <div id="root">
+
+
+    </div>
+</body>
+</html>

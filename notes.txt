@@ -54,3 +54,5 @@ Choices of managing App State
 
 Class A & Class B
 Class A depends on Class B (existential dependency)
+
+Solve the "bank account" problem using redux
