@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        body{
+            margin: 50px;
+        }
+
+    </style>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const Products = () => {
+            const [ newProductName, setNewProductName ] = React.useState('');
+            const [ products, setProducts ] = React.useState([]);
+            const onBtnAddNewClick = () => {
+                const newProductList = [...products, newProductName];
+                setProducts(newProductList);
+            }
+            return(
+                <>
+                    <h3>Products</h3>
+                    <label>Product Name : </label>
+                    <input type="text" name="productName" onChange= { evt => setNewProductName(evt.target.value)} />
+                    <button onClick={onBtnAddNewClick} >Add New</button>
+                    <ol>
+                        { products.map((product, idx) => <li key={idx}>{product}</li>) }
+                    </ol>
+                </>
+            )
+        }
+
+        ReactDOM.render(
+            <Products />,
+            document.getElementById('root')
+        );
+
+    </script>
+</head>
+<body>
+    <h1>My App</h1>
+    <div id="root">
+
+    </div>
+</body>
+</html>
