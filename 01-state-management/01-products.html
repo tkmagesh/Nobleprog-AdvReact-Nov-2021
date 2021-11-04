@@ -24,12 +24,14 @@
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const Products = () => {
+    
+        const Products = ({onListChange}) => {
             const [ newProductName, setNewProductName ] = React.useState('');
             const [ products, setProducts ] = React.useState([]);
             const onBtnAddNewClick = () => {
                 const newProductList = [...products, newProductName];
                 setProducts(newProductList);
+                onListChange(newProductList);
             }
             return(
                 <>
@@ -44,13 +46,29 @@
             )
         }
 
-        ReactDOM.render(
-            <div>
-                 <div>
-                    Products Count : 0
+        const ProductsCount = ({data}) => {
+            return (
+                <div>
+                    Products Count : {data}
                 </div>
-                <Products />
-            </div>,
+            )
+        }
+
+        const App = () => {
+            const [productsCount, setProductsCount] = React.useState(0);
+            const onListChange = (productsList) => {
+                setProductsCount(productsList.length);
+            }
+            return(
+                <div>
+                    <ProductsCount data={productsCount} />
+                    <Products onListChange={onListChange}/>
+                </div>
+            )
+        }
+
+        ReactDOM.render(
+            <App/>,
             document.getElementById('root')
         );
 
