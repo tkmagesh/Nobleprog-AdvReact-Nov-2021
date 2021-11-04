@@ -1,0 +1,29 @@
+Schedule:
+    Session - 1     : 1:30 Hrs
+    Tea Break - 1   : 0:20 mins
+    Session - 2     : 1:30 Hrs
+    Lunch Break     : 1:00 Hr
+    Session - 3     : 1:30 Hrs
+    Tea Break - 2   : 0:20 mins
+    Session - 4     : 1:30 Hrs
+
+Methodology:
+    No powerpoints
+    100% hands on
+
+About You:
+    Name
+    Primary Skillset
+    Experience in React (Mandatory)
+    Experience in Redux (if any)
+
+
+Topics
+Day-1
+    Redux
+    Hooks
+Day-2
+    React & Redux in TypeScript
+    Authentication
+    Testing
+    Performance Optimization
