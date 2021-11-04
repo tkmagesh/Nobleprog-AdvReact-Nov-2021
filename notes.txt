@@ -27,3 +27,26 @@ Day-2
     Authentication
     Testing
     Performance Optimization
+
+
+Redux?
+    Library for managing state in React
+    Why do we need it?
+
+
+State
+    UI State
+        Any data that supports the "presentational (ui)"  needs of the application
+        It is highly UNLIKELY that this data (state) is needed in other parts of the application
+        Feel free to use React.useState() to manage the UI state in the component itself
+
+    App State
+        Any data that supports the "core logic (domain)" of the application
+        It is highly LIKELY that this data (state) is needed in other parts of the application
+        DO NOT maintain this data in the component 
+
+Choices of managing App State
+    1. Redux
+    2. Mobx
+    3. Context API
+    4. Reflux
