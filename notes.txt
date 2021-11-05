@@ -91,3 +91,7 @@ Dumb Components / Presentational Components
     Have user interaction functionality
     It is advisable to have more Presentational Components
     ex., BugStats, BugEdit, BugItem, BugSort, & BugList components
+
+
+Middleware
+    Encapsulate any logic that is common across 'actions'

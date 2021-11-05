@@ -1,0 +1,32 @@
+{
+  "bugs": [
+    {
+      "id": 2,
+      "name": "Server communication failure",
+      "createdAt": "2020-11-26T11:17:31.342Z",
+      "isClosed": true,
+      "projectId" : 1
+    },
+    {
+      "id": 3,
+      "name": "User actions not recognised",
+      "isClosed": false,
+      "createdAt": "2021-09-16T12:52:46.704Z",
+      "projectId": 2
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Bug Tracker"
+    },
+    {
+      "id": 2,
+      "name": "Project Management"
+    },
+    {
+      "id": 3,
+      "name": "Time Tracker"
+    }
+  ]
+}
