@@ -66,3 +66,26 @@ To create a react application
 To start the application
     cd bug-tracker-app
     yarn start
+
+
+src
+    bugs
+        actions
+        reducers
+        store
+        components
+        index.js
+    store
+        index.js
+
+Smart Components / Container Components
+    Receive the data and actions from redux and then pass them to the Presentational Components
+    DONOT have any user interaction functionality
+    It is advisable to have fewer Smart Components
+    ex., Bugs component
+
+Dumb Components / Presentational Components
+    Receive the data and actions from the Smart Components and then render them
+    Have user interaction functionality
+    It is advisable to have more Presentational Components
+    ex., BugStats, BugEdit, BugItem, BugSort, & BugList components
