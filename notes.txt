@@ -103,3 +103,13 @@ To run the json-server
 To install axios
     yarn add axios
     
+
+TypeScript
+    superset of javascript
+    TypeScript = typesafe javascript
+    Type verification happens ONLY during the compilation time (not at runtime)
+
+    ts => ts compiler => js
+
+To create a react application in typescript
+    npx create-react-app <app-name> --template typescript
