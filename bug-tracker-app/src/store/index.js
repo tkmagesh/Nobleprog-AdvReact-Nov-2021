@@ -3,6 +3,7 @@ import bugsReducer from '../bugs/reducers/bugsReducer';
 import projectsReducer from '../projects/reducers/projectsReducer'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
     bugState : bugsReducer,
@@ -47,6 +48,14 @@ function promiseMiddleware(store){
         }
     }
 }
-const store = createStore(rootReducer, applyMiddleware(/* loggerMiddleware */ logger , /* asyncMiddleware */ thunk, promiseMiddleware));
+
+
+
+const composeEnhancers = composeWithDevTools({});
+
+const store = createStore(
+    rootReducer, composeEnhancers(
+        applyMiddleware(/* loggerMiddleware */ logger , /* asyncMiddleware */ thunk, promiseMiddleware)
+));
 
 export default store;

@@ -1,3 +1,4 @@
+import React from 'react';
 
 const BugItem = ({bug, remove, toggle}) => {
     return (
@@ -11,4 +12,6 @@ const BugItem = ({bug, remove, toggle}) => {
         </li>
     )
 }
-export default BugItem;
+
+
+export default React.memo(BugItem);

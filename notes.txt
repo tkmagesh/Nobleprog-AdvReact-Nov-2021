@@ -113,3 +113,52 @@ TypeScript
 
 To create a react application in typescript
     npx create-react-app <app-name> --template typescript
+
+
+TypeScript Overview
+let x : number;
+x = 10
+
+interface Bug {
+    id : number,
+    name : string,
+    createdAt : Date,
+    isClosed : boolean,
+    status : BugStatus,
+}
+
+enum BugStatus{
+    Open,
+    InProgress,
+    Closed
+}
+
+let bug1 : Bug = { 
+    id : 1, 
+    name : 'Bug - 1', 
+    createdAt : new Date(), 
+    isClosed : false,
+    status : BugStatus.Open 
+};
+
+let bug2 = {
+    id : 2, 
+    name : 'Bug - 2', 
+    createdAt : new Date(), 
+    isClosed : true, 
+    desc : 'sadfdsa asdfdsfdas',
+    status : BugStatus.InProgress
+};
+
+function print(bug : Bug){
+    console.log(bug.name);
+}
+
+print(bug1)
+print(bug2);
+
+var nos : Array<number> = []
+nos.push(100)
+
+
+

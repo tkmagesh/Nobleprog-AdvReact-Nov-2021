@@ -10,7 +10,7 @@ const BugEdit = ({addNew, projects}) => {
     return (
             <section className="edit">
             <label htmlFor="">Bug Name : </label>
-            <input type="text" value={newBugName} onChange={evt => setNewBugName(evt.target.value)} />
+            <input type="text" onBlur={evt => setNewBugName(evt.target.value)} />
             <label>Project : </label>
             <select onChange={ evt => setSelectedProject(parseInt(evt.target.value))}>
                 <option value="">Select Project</option>

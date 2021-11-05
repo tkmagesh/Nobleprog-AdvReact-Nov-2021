@@ -6,6 +6,41 @@
       "isClosed": false,
       "projectId": 2,
       "createdAt": "2021-11-05T06:46:39.319Z"
+    },
+    {
+      "id": 5,
+      "name": "Bug - 2",
+      "isClosed": false,
+      "projectId": 1,
+      "createdAt": "2021-11-05T08:37:55.271Z"
+    },
+    {
+      "id": 6,
+      "name": "This is a new bug",
+      "isClosed": false,
+      "projectId": 1,
+      "createdAt": "2021-11-05T08:53:24.521Z"
+    },
+    {
+      "id": 7,
+      "name": "User access denied",
+      "isClosed": false,
+      "projectId": 2,
+      "createdAt": "2021-11-05T08:54:28.150Z"
+    },
+    {
+      "id": 8,
+      "name": "Server communication failure",
+      "isClosed": false,
+      "projectId": 1,
+      "createdAt": "2021-11-05T08:57:57.248Z"
+    },
+    {
+      "id": 9,
+      "name": "Another new bug",
+      "isClosed": false,
+      "projectId": 2,
+      "createdAt": "2021-11-05T09:00:57.565Z"
     }
   ],
   "projects": [
