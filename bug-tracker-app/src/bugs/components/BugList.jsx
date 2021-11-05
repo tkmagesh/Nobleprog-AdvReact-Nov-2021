@@ -9,9 +9,9 @@ const BugList = ({bugs, toggle, remove, removeClosed}) => {
             <ol>
                 {bugsList}
             </ol>
-            <button onClick={() => removeClosed(bugs)}>Remove Closed</button>
+            {bugs.length ? (<button onClick={() => removeClosed(bugs)}>Remove Closed</button>) : null }
         </section>
     )
 };
 
-export default BugItem;
+export default BugList;
