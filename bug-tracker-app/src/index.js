@@ -3,29 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-import { bindActionCreators } from 'redux';
-import bugActionCreators from './bugs/actions';
 import store from './store';
 import Bugs from './bugs';
 import Projects from './projects';
+import { Provider } from 'react-redux';
 
-const bugActionDispatchers = bindActionCreators(bugActionCreators, store.dispatch);
-
-function renderApp(){
-    const storeState = store.getState(); // => { bugState : [], projectState : [] }
-    const bugs = storeState.bugState;
-    const projects = storeState.projectState;
-    ReactDOM.render(
+  ReactDOM.render(
+    <Provider store={store}>
       <div>
         <h1>Bug Tracker</h1>
-        <Projects projects={projects} />
-        <Bugs bugs={bugs} {...bugActionDispatchers} /> 
+        <Projects />
+        <Bugs /> 
       </div>
-        , document.getElementById('root')
-    )
-}
-renderApp();
-store.subscribe(renderApp);
+    </Provider>
+      , document.getElementById('root')
+  )
+
 
 
 // If you want to start measuring performance in your app, pass a function
