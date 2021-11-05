@@ -1,8 +1,12 @@
+import remove from './remove';
 
-const removeClosed = (bugs /* TOBE FIXED */) => {
-    const bugsToRemove = bugs.filter(bug => bug.isClosed)
-    const action = { type : 'BUGS_REMOVE_MANY', payload : bugsToRemove};
-    return action;
+//using the asyncMiddleware
+const removeClosed = () => {
+    return function(dispatch, getState){
+        const bugs = getState().bugState;
+        const bugsToRemove = bugs.filter(bug => bug.isClosed)
+        bugsToRemove.forEach(bug => dispatch(remove(bug)))
+    }
 }
 
 export default removeClosed;
