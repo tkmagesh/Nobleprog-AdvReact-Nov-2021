@@ -7,15 +7,19 @@ import { bindActionCreators } from 'redux';
 import bugActionCreators from './bugs/actions';
 import store from './store';
 import Bugs from './bugs';
+import Projects from './projects';
 
 const bugActionDispatchers = bindActionCreators(bugActionCreators, store.dispatch);
 
 function renderApp(){
-    const bugs = store.getState();
+    const storeState = store.getState(); // => { bugState : [], projectState : [] }
+    const bugs = storeState.bugState;
+    const projects = storeState.projectState;
     ReactDOM.render(
       <div>
         <h1>Bug Tracker</h1>
-        <Bugs bugs={bugs} {...bugActionDispatchers} />
+        <Projects projects={projects} />
+        <Bugs bugs={bugs} {...bugActionDispatchers} /> 
       </div>
         , document.getElementById('root')
     )
