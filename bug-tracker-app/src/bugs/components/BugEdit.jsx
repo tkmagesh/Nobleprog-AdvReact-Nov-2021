@@ -1,10 +1,10 @@
 import {useState} from 'react';
 
-const BugEdit = ({addNew}) => {
+const BugEdit = ({addNew, projects}) => {
     const [newBugName, setNewBugName] = useState('');
-    
+    const [selectedProject, setSelectedProject] = useState(0);
     const onBtnCreateClick = () => {
-        addNew(newBugName);
+        addNew(newBugName, selectedProject);
         setNewBugName('');
     };
     return (
@@ -12,16 +12,11 @@ const BugEdit = ({addNew}) => {
             <label htmlFor="">Bug Name : </label>
             <input type="text" value={newBugName} onChange={evt => setNewBugName(evt.target.value)} />
             <label>Project : </label>
-            <select>
+            <select onChange={ evt => setSelectedProject(parseInt(evt.target.value))}>
                 <option value="">Select Project</option>
-                {/* 
-                Generate this using the project data from the store
-                <option value="1">Project 1</option>
-                <option value="2">Project 2</option>
-                <option value="3">Project 3</option> 
-                */}
+                {projects.map(project => <option key={project.id} value={project.id}>{project.name}</option>)}
             </select>
-            <button onClick={() => onBtnCreateClick(newBugName)}>Create New</button>
+            <button onClick={() => onBtnCreateClick()}>Create New</button>
         </section>
     )
 };

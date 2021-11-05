@@ -80,12 +80,14 @@ src
 
 Smart Components / Container Components
     Receive the data and actions from redux and then pass them to the Presentational Components
+    Using useDispatch, useSelector are permitted
     DONOT have any user interaction functionality
     It is advisable to have fewer Smart Components
     ex., Bugs component
 
 Dumb Components / Presentational Components
     Receive the data and actions from the Smart Components and then render them
+    DONOT use useDispatch, useSelector etc
     Have user interaction functionality
     It is advisable to have more Presentational Components
     ex., BugStats, BugEdit, BugItem, BugSort, & BugList components
