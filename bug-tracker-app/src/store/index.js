@@ -1,12 +1,15 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import bugsReducer from '../bugs/reducers/bugsReducer';
 import projectsReducer from '../projects/reducers/projectsReducer'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     bugState : bugsReducer,
     projectState : projectsReducer
 });
 
+//replace the following with 'redux-logger' middleware
 function loggerMiddleware(store){
     return function(next){
         return function(action){
@@ -20,6 +23,8 @@ function loggerMiddleware(store){
     }
 }
 
+
+//replace the following with 'redux-thunk' middleware
 function asyncMiddleware(store){
     return function(next){
         return function(action){
@@ -42,6 +47,6 @@ function promiseMiddleware(store){
         }
     }
 }
-const store = createStore(rootReducer, applyMiddleware(loggerMiddleware, asyncMiddleware, promiseMiddleware));
+const store = createStore(rootReducer, applyMiddleware(/* loggerMiddleware */ logger , /* asyncMiddleware */ thunk, promiseMiddleware));
 
 export default store;
