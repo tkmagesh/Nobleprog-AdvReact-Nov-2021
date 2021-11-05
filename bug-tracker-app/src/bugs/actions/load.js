@@ -1,6 +1,8 @@
 
 import axios from 'axios';
 
+import bugApi from '../services/bugApi';
+
 function getLocalBugs(){
     return [
         {
@@ -20,14 +22,47 @@ function getLocalBugs(){
     ]
 }
 
+//using the asyncMiddleware
+/* 
+//returns a function (handled by the asyncMiddleware)
 const load = () => {
-    
-    axios.get('http://localhost:3030/bugs')
-        .then(response => response.data)
-        .then(bugs => console.table(bugs))
+    return function(dispatch){
+        //asynchronous
+        axios.get('http://localhost:3030/bugs')
+            .then(response => response.data)
+            .then(bugs => {
+                console.table(bugs);
+                const action = { type : 'BUGS_LOAD', payload : bugs}
+                dispatch(action);
+            });
+    }
+} 
+*/
 
-    const bugs = getLocalBugs();
-    const action = { type : 'BUGS_LOAD', payload : bugs}
+//returns a promise - handled by the promiseMiddleware
+/* 
+const load = () => {
+    return axios.get('http://localhost:3030/bugs')
+        .then(response => response.data)
+        .then(bugs => {
+            const action = { type : 'BUGS_LOAD', payload : bugs}
+            return action;
+        });
+} 
+*/
+
+//returns a promise - handled by the promiseMiddleware
+/* const load = async () => {
+    const response = await axios.get('http://localhost:3030/bugs');
+    const action = { type : 'BUGS_LOAD', payload : response.data};
+    return action;
+} */
+
+//returns a promise - handled by the promiseMiddleware
+//using bugApi
+const load = async () => {
+    const bugs = await bugApi.getAll();
+    const action = { type : 'BUGS_LOAD', payload : bugs};
     return action;
 }
 

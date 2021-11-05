@@ -20,6 +20,28 @@ function loggerMiddleware(store){
     }
 }
 
-const store = createStore(rootReducer, applyMiddleware(loggerMiddleware));
+function asyncMiddleware(store){
+    return function(next){
+        return function(action){
+            if (typeof action === 'function'){
+                return action(store.dispatch);
+            }
+            return next(action);
+        }
+    }
+}
+
+function promiseMiddleware(store){
+    return function(next){
+        return function(action){
+            if (action instanceof Promise){
+                action.then(actionObj => store.dispatch(actionObj))
+                return;
+            }
+            return next(action);
+        }
+    }
+}
+const store = createStore(rootReducer, applyMiddleware(loggerMiddleware, asyncMiddleware, promiseMiddleware));
 
 export default store;
