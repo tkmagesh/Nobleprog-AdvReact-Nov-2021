@@ -56,3 +56,13 @@ Class A & Class B
 Class A depends on Class B (existential dependency)
 
 Solve the "bank account" problem using redux
+
+To install yarn
+    npm install yarn -g
+
+To create a react application
+    yarn create react-app bug-tracker-app
+
+To start the application
+    cd bug-tracker-app
+    yarn start
