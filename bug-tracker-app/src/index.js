@@ -8,12 +8,17 @@ import Bugs from './bugs';
 import Projects from './projects';
 import { Provider } from 'react-redux';
 
+import axios from 'axios';
+
+//TO BE REMOVED
+window['axios'] = axios;
+
   ReactDOM.render(
     <Provider store={store}>
       <div>
         <h1>Bug Tracker</h1>
-        <Projects />
         <Bugs /> 
+        <Projects />
       </div>
     </Provider>
       , document.getElementById('root')

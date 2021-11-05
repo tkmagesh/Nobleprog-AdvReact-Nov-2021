@@ -12,6 +12,9 @@ const bugsReducer = (currentState = [], action) => {
     if (action.type === 'BUGS_REMOVE_MANY'){
         return currentState.filter(bug => !action.payload.find(bugToRemove => bugToRemove.id === bug.id));
     }
+    if (action.type === 'BUGS_LOAD'){
+        return action.payload;
+    }
     return currentState;
 }
 

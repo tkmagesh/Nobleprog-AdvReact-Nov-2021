@@ -95,3 +95,11 @@ Dumb Components / Presentational Components
 
 Middleware
     Encapsulate any logic that is common across 'actions'
+
+To run the json-server
+    cd data-server
+    npx json-server db.json -p 3030
+
+To install axios
+    yarn add axios
+    

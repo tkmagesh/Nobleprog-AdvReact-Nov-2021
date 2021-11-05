@@ -15,10 +15,11 @@ const Bugs = () => {
 
     //creating the action dispatchers
     const dispatch = useDispatch();
-    const { addNew, toggle, remove, removeClosed } = bindActionCreators(bugActionCreators, dispatch);
+    const { addNew, toggle, remove, removeClosed, load } = bindActionCreators(bugActionCreators, dispatch);
     return (
         <>
             <h3>Bugs</h3>
+            <button onClick={load}>Load Bugs</button>
             <BugStats bugs={bugsView} />
             <BugEdit addNew={addNew} projects={projects}/>
             <BugSort/>
